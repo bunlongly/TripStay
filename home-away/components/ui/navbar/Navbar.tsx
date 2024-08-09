@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from './Logo';
 import NavSearch from './NavSearch';
-import LinksDropdown from './LinksDropdown';
+import LinksDropdown from './LinkDropdown';
 import DarkMode from './DarkMode';
 
 function Navbar() {
