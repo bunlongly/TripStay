@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { LuTent } from 'react-icons/lu';
-import { Button } from '../button';
+import { Button } from '../ui/button';
 
 function Logo() {
   return (
@@ -11,4 +11,4 @@ function Logo() {
     </Button>
   );
 }
-export default Logo
+export default Logo;
