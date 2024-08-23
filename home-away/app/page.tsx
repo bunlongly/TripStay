@@ -1,14 +1,18 @@
 import React from 'react';
-import { Button } from '@/components/ui/button';
+import PropertiesContainer from '@/components/home/PropertiesContainer';
+import CategoriesList from '@/components/home/CategoriesList';
 
-function HomePage() {
+function HomePage({
+  searchParams
+}: {
+  searchParams: { category?: string; search?: string };
+}) {
+  console.log(searchParams)
   return (
-    <div>
-      <h1 className='text-3xl'>HomePage</h1>
-      <Button variant='outline' size='lg' className='capitalize m-8'>
-        Click me
-      </Button>
-    </div>
+    <section>
+      <CategoriesList />
+      <PropertiesContainer />
+    </section>
   );
 }
 
