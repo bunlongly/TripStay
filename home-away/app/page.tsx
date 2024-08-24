@@ -10,9 +10,15 @@ function HomePage({
   console.log(searchParams)
   return (
     <section>
-      <CategoriesList />
-      <PropertiesContainer />
-    </section>
+    <CategoriesList
+      category={searchParams?.category}
+      search={searchParams?.search}
+    />
+    <PropertiesContainer
+      category={searchParams?.category}
+      search={searchParams?.search}
+    />
+  </section>
   );
 }
 
