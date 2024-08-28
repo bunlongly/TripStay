@@ -2815,7 +2815,6 @@ import { useState, useEffect } from 'react';
 
 function NavSearch() {
   const searchParams = useSearchParams();
-
   const pathname = usePathname();
   const { replace } = useRouter();
   const [search, setSearch] = useState(

@@ -1,15 +1,12 @@
-import React from 'react';
-import PropertiesContainer from '@/components/home/PropertiesContainer';
 import CategoriesList from '@/components/home/CategoriesList';
-import { Suspense } from 'react';
+import PropertiesContainer from '@/components/home/PropertiesContainer';
 import LoadingCards from '@/components/card/LoadingCards';
-
+import { Suspense } from 'react';
 function HomePage({
   searchParams
 }: {
   searchParams: { category?: string; search?: string };
 }) {
-  console.log(searchParams);
   return (
     <section>
       <CategoriesList
@@ -25,5 +22,4 @@ function HomePage({
     </section>
   );
 }
-
 export default HomePage;
