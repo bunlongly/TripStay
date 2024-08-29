@@ -1,6 +1,11 @@
 'use server';
 
-import { imageSchema, profileSchema, validateWithZodSchema, propertySchema } from './schemas';
+import {
+  imageSchema,
+  profileSchema,
+  validateWithZodSchema,
+  propertySchema
+} from './schemas';
 import db from './db';
 import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
@@ -132,7 +137,6 @@ export const updateProfileImageAction = async (
   }
 };
 
-
 export const createPropertyAction = async (
   prevState: any,
   formData: FormData
@@ -150,8 +154,8 @@ export const createPropertyAction = async (
       data: {
         ...validatedFields,
         image: fullPath,
-        profileId: user.id,
-      },
+        profileId: user.id
+      }
     });
   } catch (error) {
     return renderError(error);
@@ -161,7 +165,7 @@ export const createPropertyAction = async (
 
 export const fetchProperties = async ({
   search = '',
-  category,
+  category
 }: {
   search?: string;
   category?: string;
@@ -171,8 +175,8 @@ export const fetchProperties = async ({
       category,
       OR: [
         { name: { contains: search, mode: 'insensitive' } },
-        { tagline: { contains: search, mode: 'insensitive' } },
-      ],
+        { tagline: { contains: search, mode: 'insensitive' } }
+      ]
     },
     select: {
       id: true,
@@ -180,8 +184,55 @@ export const fetchProperties = async ({
       tagline: true,
       country: true,
       image: true,
-      price: true,
-    },
+      price: true
+    }
   });
   return properties;
+};
+
+export const fetchFavoriteId = async ({
+  propertyId
+}: {
+  propertyId: string;
+}) => {
+  const user = await getAuthUser();
+  const favorite = await db.favorite.findFirst({
+    where: {
+      propertyId,
+      profileId: user.id
+    },
+    select: {
+      id: true
+    }
+  });
+  return favorite?.id || null;
+};
+
+export const toggleFavoriteAction = async (prevState: {
+  propertyId: string;
+  favoriteId: string | null;
+  pathname: string;
+}) => {
+  const user = await getAuthUser();
+  const { propertyId, favoriteId, pathname } = prevState;
+  try {
+    if (favoriteId) {
+      await db.favorite.delete({
+        where: {
+          id: favoriteId
+        }
+      });
+    } else {
+      await db.favorite.create({
+        data: {
+          propertyId,
+          profileId: user.id
+        }
+      });
+    }
+    revalidatePath(pathname);
+    return { message: favoriteId ? 'Removed from Faves' : 'Added to Faves' };
+  } catch (error) {
+    return renderError(error);
+  }
 };
