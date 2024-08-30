@@ -237,12 +237,11 @@ export const toggleFavoriteAction = async (prevState: {
   }
 };
 
-
 export const fetchFavorites = async () => {
   const user = await getAuthUser();
   const favorites = await db.favorite.findMany({
     where: {
-      profileId: user.id,
+      profileId: user.id
     },
     select: {
       property: {
@@ -252,10 +251,21 @@ export const fetchFavorites = async () => {
           tagline: true,
           price: true,
           country: true,
-          image: true,
-        },
-      },
-    },
+          image: true
+        }
+      }
+    }
   });
-  return favorites.map((favorite) => favorite.property);
+  return favorites.map(favorite => favorite.property);
+};
+
+export const fetchPropertyDetails =  (id: string) => {
+  return db.property.findUnique({
+    where: {
+      id
+    },
+    include: {
+      profile: true
+    }
+  });
 };
