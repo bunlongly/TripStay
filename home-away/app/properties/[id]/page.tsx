@@ -7,6 +7,7 @@ import ImageContainer from '@/components/properties/ImageContainer';
 
 import { redirect } from 'next/navigation';
 import PropertyRating from '@/components/card/PropertyRating';
+import BookingCalender from '@/components/properties/BookingCalender';
 
 async function PropertyDetailsPage({ params }: { params: { id: string } }) {
   const property = await fetchPropertyDetails(params.id);
@@ -24,14 +25,16 @@ async function PropertyDetailsPage({ params }: { params: { id: string } }) {
         </div>
       </header>
       <ImageContainer mainImage={property.image} name={property.name} />
-      <section className='lg-grid lg:grid-cols-12 gap-x-12 mt-12'>
+      <section className='lg:grid lg:grid-cols-12 gap-x-12 mt-12'>
         <div className='lg:col-span-8'>
           <div className='flex gap-x-4 items-center'>
             <h1 className='text-xl font-bold'>{property.name}</h1>
             <PropertyRating inPage propertyId={property.id} />
           </div>
         </div>
-        <div className='lg:col-span-4 flex flex-col items-center'></div>
+        <div className='lg:col-span-4 flex flex-col items-center'>
+          <BookingCalender />
+        </div>
       </section>
     </section>
   );
