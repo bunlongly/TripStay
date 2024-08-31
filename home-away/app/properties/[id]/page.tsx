@@ -7,6 +7,7 @@ import ImageContainer from '@/components/properties/ImageContainer';
 
 import { redirect } from 'next/navigation';
 import PropertyRating from '@/components/card/PropertyRating';
+import PropertyDetails from '@/components/properties/PropertyDetails';
 import BookingCalender from '@/components/properties/BookingCalender';
 
 async function PropertyDetailsPage({ params }: { params: { id: string } }) {
@@ -31,6 +32,7 @@ async function PropertyDetailsPage({ params }: { params: { id: string } }) {
             <h1 className='text-xl font-bold'>{property.name}</h1>
             <PropertyRating inPage propertyId={property.id} />
           </div>
+          <PropertyDetails details={details} />
         </div>
         <div className='lg:col-span-4 flex flex-col items-center'>
           <BookingCalender />
