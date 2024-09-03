@@ -261,14 +261,21 @@ export const fetchFavorites = async () => {
   return favorites.map(favorite => favorite.property);
 };
 
+
 export const fetchPropertyDetails = (id: string) => {
   return db.property.findUnique({
     where: {
-      id
+      id,
     },
     include: {
-      profile: true
-    }
+      profile: true,
+      bookings: {
+        select: {
+          checkIn: true,
+          checkOut: true,
+        },
+      },
+    },
   });
 };
 
