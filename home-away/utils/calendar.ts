@@ -3,12 +3,12 @@ import { Booking } from '@/utils/types';
 
 export const defaultSelected: DateRange = {
   from: undefined,
-  to: undefined,
+  to: undefined
 };
 
 export const generateBlockedPeriods = ({
   bookings,
-  today,
+  today
 }: {
   bookings: Booking[];
   today: Date;
@@ -16,14 +16,14 @@ export const generateBlockedPeriods = ({
   today.setHours(0, 0, 0, 0); // Set the time to 00:00:00.000
 
   const disabledDays: DateRange[] = [
-    ...bookings.map((booking) => ({
+    ...bookings.map(booking => ({
       from: booking.checkIn,
-      to: booking.checkOut,
+      to: booking.checkOut
     })),
     {
       from: new Date(0), // This is 01 January 1970 00:00:00 UTC.
-      to: new Date(today.getTime() - 24 * 60 * 60 * 1000), // This is yesterday.
-    },
+      to: new Date(today.getTime() - 24 * 60 * 60 * 1000) // This is yesterday.
+    }
   ];
   return disabledDays;
 };
@@ -53,7 +53,7 @@ export const generateDisabledDates = (
   const today = new Date();
   today.setHours(0, 0, 0, 0); // set time to 00:00:00 to compare only the date part
 
-  disabledDays.forEach((range) => {
+  disabledDays.forEach(range => {
     if (!range.from || !range.to) return;
 
     let currentDate = new Date(range.from);
@@ -75,7 +75,7 @@ export const generateDisabledDates = (
 
 export function calculateDaysBetween({
   checkIn,
-  checkOut,
+  checkOut
 }: {
   checkIn: Date;
   checkOut: Date;
