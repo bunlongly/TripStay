@@ -1,7 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 import { NextResponse } from 'next/server';
-import { GiConsoleController } from 'react-icons/gi';
 
 const isPublicRoute = createRouteMatcher(['/', '/properties(.*)']);
 
@@ -17,3 +16,4 @@ export default clerkMiddleware(async (auth, req) => {
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 };
+
