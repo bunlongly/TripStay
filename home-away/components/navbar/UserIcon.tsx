@@ -8,6 +8,6 @@ async function UserIcon() {
     return (
       <img src={profileImage} className='w-6 h-6 rounded-full object-cover' />
     );
-  return <LuUser2 className='w-6 h-6 bg-primary rounded-full text-white' />;
+  return <LuUser2 className='w-7 h-6 bg-primary rounded-full text-white' />;
 }
 export default UserIcon;
